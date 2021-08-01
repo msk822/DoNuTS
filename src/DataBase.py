@@ -3,7 +3,7 @@ import sqlite3
 class WriteDB():
     def __init__(self, MODALITY:str):
         self.MODALITY = MODALITY
-        self.DBNAME = 'DONUTS' + '.db'
+        self.DBNAME = './Resources/DONUTS.db'
         self.MODALITY = MODALITY
         
         self.conn = sqlite3.connect(self.DBNAME)
@@ -172,3 +172,4 @@ class WriteDB():
     def main(self, data:list):
         self.insertdb(table=self.MODALITY, data=data)
         self.conn.close()
+        

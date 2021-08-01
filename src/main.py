@@ -21,22 +21,29 @@ def main():
     MODALITY = funcs.select_modality()
 
     if MODALITY in ["CT", "NM", "ANGIO", "PT"]:
-        print(MODALITY)
+        print("{} が選択されました".format(MODALITY))
     else:
-        print("Auto Identify Mode")
+        print("Auto Mode が選択されました")
 
     # コンソールの作成
-    console_root = tk.Tk()
-    console_root.title("Modalityを選択")
-    console_root.geometry("500x400")
+    # console_root = tk.Tk()
+    # console_root.title("Modalityを選択")
+    # console_root.geometry("500x400")
+    
+    # button_exit = tk.Button(console_root,
+    #                         text='終了',
+    #                         command=lambda: sys.exit(0))
+    # button_exit.pack(padx=5, pady=10)
+    # button_exit.update()
+    
+    print("{} が選択されました".format(MODALITY))
+    # label1 = tk.Label(console_root,
+    #                   text=MODALITY + "が選択されました")
+    # label1.pack(padx=5, pady=5)
 
-    label1 = tk.Label(console_root,
-                      text=MODALITY + "が選択されました")
-    label1.pack(padx=5, pady=5)
-
-    label2 = tk.Label(console_root,
-                      text='**************************処理開始****************************')
-    label2.pack(padx=5, pady=5)
+    # label2 = tk.Label(console_root,
+    #                   text='**************************処理開始****************************')
+    # label2.pack(padx=5, pady=5)
 
     print('**************************処理開始****************************')
     # desktop_dir = os.getenv('HOMEDRIVE') + os.getenv('HOMEPATH') + '/Desktop'
@@ -59,18 +66,20 @@ def main():
         else:
             rdsr_files_dict, modality_files_dict = funcs.separate_rdsr_dicom_files_and_identify_each_modality(
                 dicom_files=dicom_files)
-
-
-        label3 = tk.Label(console_root,
-                            text="見つかったRDSRファイル : " + funcs.show_len_identified(rdsr_files_dict))
-        label3.pack(padx=5, pady=5)
-        label3.update()
+            
+            
+        print("見つかったRDSRファイル : {}".format(funcs.show_len_identified(rdsr_files_dict)))
+        # label3 = tk.Label(console_root,
+        #                     text="見つかったRDSRファイル : " + funcs.show_len_identified(rdsr_files_dict))
+        # label3.pack(padx=5, pady=5)
+        # label3.update()
         
         if MODALITY != "Auto":
-            label4 = tk.Label(console_root,
-                                text="見つかったModalityファイル : " + funcs.show_len_identified(modality_files_dict))
-            label4.pack(padx=5, pady=5)
-            label4.update()
+            print("見つかったRDSRファイル : {}".format(funcs.show_len_identified(modality_files_dict)))
+            # label4 = tk.Label(console_root,
+            #                     text="見つかったModalityファイル : " + funcs.show_len_identified(modality_files_dict))
+            # label4.pack(padx=5, pady=5)
+            # label4.update()
 
 
 
@@ -269,12 +278,10 @@ def main():
         
 
     # jsonおよびcsvとしてデータを保存
-    save_name = '/' + MODALITY + '_out_'
+    save_name = './Resources/' + MODALITY + '_out_'
     
-    file_name_json = dicom_directory + save_name + \
-        str(datetime.date.today()) + ".json"
-    file_name_csv = dicom_directory + save_name + \
-        str(datetime.date.today()) + ".csv"
+    file_name_json = save_name + str(datetime.date.today()) + ".json"
+    file_name_csv = save_name + str(datetime.date.today()) + ".csv"
 
     # json
     with open(file_name_json, mode='wt', encoding='utf-8') as file:
@@ -290,26 +297,22 @@ def main():
     print('********************RDSRファイルの処理完了********************')
     print("新規データ:{}件".format(new_data_cnt))
     print("重複データ:{}件".format(duplicate_data_cnt))
-    label5 = tk.Label(console_root,
-                      text='********************RDSRファイルの処理完了********************')
-    label5.pack(padx=5, pady=5)
-    label5.update()
+    # label5 = tk.Label(console_root,
+    #                   text='********************RDSRファイルの処理完了********************')
+    # label5.pack(padx=5, pady=5)
+    # label5.update()
 
     # EXCELのパス ユーザーごとに異なる
-    EXCEL_PATH = "C:/Program Files/Microsoft Office/root/Office16/EXCEL.EXE"
-    buton_csv = tk.Button(console_root,
-                          text='csvを開く',
-                          command=lambda: subprocess.run([EXCEL_PATH, file_name_csv]))
-    buton_csv.pack(padx=5, pady=5)
-    buton_csv.update()
+    # EXCEL_PATH = "C:/Program Files/Microsoft Office/root/Office16/EXCEL.EXE"
+    # buton_csv = tk.Button(console_root,
+    #                       text='csvを開く',
+    #                       command=lambda: subprocess.run([EXCEL_PATH, file_name_csv]))
+    # buton_csv.pack(padx=5, pady=5)
+    # buton_csv.update()
 
-    button_exit = tk.Button(console_root,
-                            text='終了',
-                            command=lambda: sys.exit(0))
-    button_exit.pack(padx=5, pady=5)
-    button_exit.update()
+    
 
-    console_root.mainloop()
+    # console_root.mainloop()
 
 
 
