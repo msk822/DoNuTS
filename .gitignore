@@ -10,3 +10,5 @@ __pycache__/
 *.DS_Store
 src/build/
 src/dist/
+src/Untitled.ipynb
+src/.ipynb_checkpoints/Untitled-checkpoint.ipynb
