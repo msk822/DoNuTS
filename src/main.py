@@ -1,18 +1,20 @@
-import subprocess
-import pydicom
 import datetime
-import pandas as pd
-import json
-import donuts_datasets
-import DataBase
-import funcs
-import tkinter as tk
 import gc
-import sqlite3
-
-import sys
+import json
 import os
+import sqlite3
+import sys
+import time
+import tkinter as tk
 from tkinter import messagebox
+
+import pandas as pd
+import pydicom
+
+import DataBase
+import donuts_datasets
+import funcs
+
 sys.path.append("./")
 
 
@@ -257,6 +259,7 @@ def main():
                         write_list = [v for v in temp_dict.values()]
                         DATABASE = DataBase.WriteDB(MODALITY=_modality)
                         DATABASE.main(data=write_list)
+                        DATABASE.close()
                         new_data_cnt += 1
                     except :
                         duplicate_data_cnt += 1
@@ -276,6 +279,15 @@ def main():
     
     # for _modality in modality_files_dict:
         
+        
+    all_dict = donuts_datasets.return_json_temprate(MODALITY="Auto")
+    DATABASE = DataBase.WriteDB(MODALITY="ALL")
+    for each_rdsr_data in rdsr_data:
+        all_dict.update(each_rdsr_data)
+
+        write_list = [v for v in all_dict.values()]
+        DATABASE.main(data=write_list)
+    DATABASE.close()
 
     # jsonおよびcsvとしてデータを保存
     save_name = './Resources/' + MODALITY + '_out_'
@@ -297,6 +309,8 @@ def main():
     print('********************RDSRファイルの処理完了********************')
     print("新規データ:{}件".format(new_data_cnt))
     print("重複データ:{}件".format(duplicate_data_cnt))
+    print("5秒後に終了します.")
+    time.sleep(5)
     # label5 = tk.Label(console_root,
     #                   text='********************RDSRファイルの処理完了********************')
     # label5.pack(padx=5, pady=5)
