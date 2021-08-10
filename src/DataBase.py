@@ -148,7 +148,7 @@ class WriteDB():
                                 )
                                 """ )
             
-        elif table == "ALL":
+        elif table == "Auto":
             self.cursor.execute("CREATE TABLE IF NOT EXISTS " + table + 
                                 """
                                 (
