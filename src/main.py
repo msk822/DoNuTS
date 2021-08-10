@@ -281,7 +281,7 @@ def main():
         
         
     all_dict = donuts_datasets.return_json_temprate(MODALITY="Auto")
-    DATABASE = DataBase.WriteDB(MODALITY="ALL")
+    DATABASE = DataBase.WriteDB(MODALITY="Auto")
     for each_rdsr_data in rdsr_data:
         all_dict.update(each_rdsr_data)
 
