@@ -231,13 +231,11 @@ class WriteDB():
         tu = tuple(t)
         tu = '(' + tu[0] + ')'
         
-        try:
-            sql =  "INSERT INTO " + table + " VALUES " + tu
-            data = tuple(data)
-            self.conn.execute(sql, data)
-            self.conn.commit()
-        except :
-            pass
+        
+        sql =  "INSERT INTO " + table + " VALUES " + tu
+        data = tuple(data)
+        self.conn.execute(sql, data)
+        self.conn.commit()
         
     def main(self, data:list):
         self.insertdb(table=self.MODALITY, data=data)
