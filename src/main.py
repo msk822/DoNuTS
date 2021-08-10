@@ -309,11 +309,14 @@ def main():
     del df
     gc.collect()
 
-    # print('********************RDSRファイルの処理完了********************')
-    # print("新規データ:{}件".format(new_data_cnt))
-    # print("重複データ:{}件".format(duplicate_data_cnt))
-    # print("5秒後に終了します.")
-    # time.sleep(5)
+    print('********************RDSRファイルの処理完了********************')
+    print("新規データ:{}件".format(new_data_cnt))
+    print("重複データ:{}件".format(duplicate_data_cnt))
+    print("5秒後に終了します.")
+    time.sleep(5)
+    
+    
+    
     # label5 = tk.Label(console_root,
     #                   text='********************RDSRファイルの処理完了********************')
     # label5.pack(padx=5, pady=5)
