@@ -283,10 +283,12 @@ def main():
     all_dict = donuts_datasets.return_json_temprate(MODALITY="Auto")
     DATABASE = DataBase.WriteDB(MODALITY="Auto")
     for each_rdsr_data in rdsr_data:
-        all_dict.update(each_rdsr_data)
-
-        write_list = [v for v in all_dict.values()]
-        DATABASE.main(data=write_list)
+        try:
+            all_dict.update(each_rdsr_data)
+            write_list = [v for v in all_dict.values()]
+            DATABASE.main(data=write_list)
+        except:
+            pass
     DATABASE.close()
 
     # jsonおよびcsvとしてデータを保存
